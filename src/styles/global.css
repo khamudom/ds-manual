@@ -311,14 +311,11 @@ table {
   margin: 0 0 var(--space-3);
   font-size: var(--step--1);
   font-family: var(--font-ui);
-  table-layout: fixed;
 }
 
 th,
 td {
   overflow-wrap: break-word;
-  word-break: normal;
-  hyphens: auto;
 }
 
 th {
@@ -331,22 +328,6 @@ td {
   border-bottom: 1px solid var(--line);
   padding: var(--space-1) var(--space-2) var(--space-1) 0;
   vertical-align: top;
-}
-
-/* Prefer readable columns on the common 3-col reference table */
-table th:nth-child(1),
-table td:nth-child(1) {
-  width: 34%;
-}
-
-table th:nth-child(2),
-table td:nth-child(2) {
-  width: 46%;
-}
-
-table th:nth-child(3),
-table td:nth-child(3) {
-  width: 20%;
 }
 
 /* ------------------------------------------------------- reusable pieces */
@@ -595,5 +576,52 @@ table td:nth-child(3) {
 
   .progress-count {
     min-width: 0;
+  }
+
+  /* Stack tables so cells wrap vertically instead of forcing page scroll */
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  tr {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg-raised);
+    padding: var(--space-2) var(--space-3);
+    margin: 0 0 var(--space-2);
+  }
+
+  td {
+    border: 0;
+    padding: 0.15rem 0;
+  }
+
+  td:first-child {
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+
+  td[data-label]::before {
+    content: attr(data-label) ": ";
+    color: var(--ink-soft);
+    font-weight: 600;
   }
 }
