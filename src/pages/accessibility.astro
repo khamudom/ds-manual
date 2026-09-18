@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Accessibility">
+  <h1>Accessibility</h1>
+  <p class="lede">
+    The system's biggest lever: fix it once in a component and every product inherits the fix. Target
+    in most orgs and jurisdictions: WCAG 2.2 Level AA.
+  </p>
+
+  <h2>WCAG in one screen</h2>
+  <p>
+    WCAG organizes success criteria under four principles — content must be
+    <strong>Perceivable, Operable, Understandable, Robust</strong> (POUR) — at three levels (A, AA,
+    AAA). WCAG 2.2 is the current W3C Recommendation; it added nine criteria over 2.1, including
+    focus appearance/obscurement, minimum target size, and accessible authentication.
+  </p>
+
+  <h2>Numbers you keep reaching for</h2>
+  <table>
+    <thead>
+      <tr><th>Requirement</th><th>Value</th><th>Criterion</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Text contrast</td><td>4.5:1 (3:1 for large text ≥ 24px / 18.7px bold)</td><td>1.4.3 AA</td></tr>
+      <tr><td>UI component & graphics contrast</td><td>3:1</td><td>1.4.11 AA</td></tr>
+      <tr><td>Reflow without horizontal scroll</td><td>320 CSS px width / 400% zoom</td><td>1.4.10 AA</td></tr>
+      <tr><td>Text resize</td><td>200% without loss</td><td>1.4.4 AA</td></tr>
+      <tr><td>Pointer target size</td><td>24×24 CSS px minimum</td><td>2.5.8 AA</td></tr>
+      <tr><td>Focus not fully hidden</td><td>focused element at least partially visible</td><td>2.4.11 AA</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Keyboard, always</h2>
+  <ul>
+    <li>Everything operable by pointer is operable by keyboard, with no traps (2.1.1, 2.1.2).</li>
+    <li>Focus order follows meaning; focus is visible (2.4.3, 2.4.7).</li>
+    <li>Composite widgets (tabs, menus, grids) use arrow-key navigation per their APG pattern, so the Tab key moves between widgets, not through every item.</li>
+    <li>Dialogs trap focus while open and return it to the trigger on close.</li>
+  </ul>
+
+  <h2>ARIA, sparingly</h2>
+  <ul>
+    <li>Semantics come from HTML first; ARIA fills gaps. No ARIA is better than wrong ARIA — a wrong role misleads the screen reader with full confidence.</li>
+    <li>Every interactive element needs an accessible <strong>name</strong>, <strong>role</strong>, and (where stateful) <strong>value/state</strong> (4.1.2).</li>
+    <li>ARIA changes what's announced, never how something behaves — adding <code>role="button"</code> obliges you to add the keyboard handling yourself.</li>
+    <li>Live regions (<code>aria-live</code>, <code>role="status"</code>) announce async updates: form results, toasts, loading completion. Keep them terse; assertive only for urgent interruptions.</li>
+  </ul>
+
+  <h2>Beyond the keyboard</h2>
+  <ul>
+    <li><strong>Motion:</strong> honor <code>prefers-reduced-motion</code>; no content flashing more than 3×/second (2.3.1).</li>
+    <li><strong>Color:</strong> never the only signal (1.4.1); check both themes, and forced-colors/high-contrast mode.</li>
+    <li><strong>Media:</strong> captions for video, alt text that conveys purpose, empty <code>alt=""</code> for decoration.</li>
+    <li><strong>Time:</strong> user control over timeouts and auto-updating content (2.2.1, 2.2.2).</li>
+    <li><strong>Cognition:</strong> plain language, consistent placement and naming, no memory tests — 2.2's accessible-authentication criterion (3.3.8) is the codified version.</li>
+  </ul>
+
+  <h2>Testing routine</h2>
+  <ol>
+    <li><strong>Automated:</strong> axe (or equivalent) in CI catches roughly a third of issues — necessary, nowhere near sufficient.</li>
+    <li><strong>Keyboard pass:</strong> unplug the mouse; complete the component's whole task.</li>
+    <li><strong>Screen reader pass:</strong> at least one real pairing — NVDA + Chrome/Firefox on Windows, VoiceOver + Safari on macOS/iOS.</li>
+    <li><strong>Zoom & reflow:</strong> 400% zoom, 320px width, text-only zoom at 200%.</li>
+    <li><strong>Document it:</strong> each component's docs state what was tested and any known gaps.</li>
+  </ol>
+
+  <div class="sources">
+    <h2>Primary reading</h2>
+    <ul>
+      <li><a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2 — the Recommendation</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/quickref/">How to Meet WCAG (Quick Reference)</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/">ARIA Authoring Practices Guide</a></li>
+      <li><a href="https://www.w3.org/TR/wai-aria-1.2/">WAI-ARIA 1.2 specification</a></li>
+      <li><a href="https://www.w3.org/WAI/test-evaluate/">W3C WAI — evaluating accessibility</a></li>
+      <li><a href="https://webaim.org/resources/contrastchecker/">WebAIM contrast checker</a></li>
+    </ul>
+  </div>
+</Base>

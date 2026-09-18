@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Start here">
+  <h1>The design system field manual</h1>
+  <p class="lede">
+    A working reference for owning a design system at senior/principal level — the things worth
+    knowing cold, the things worth looking up, and the questions to ask before anyone writes code.
+  </p>
+
+  <h2>What this is for</h2>
+  <p>
+    Three situations bring you here:
+  </p>
+  <ul>
+    <li>
+      <strong>You need to recall something.</strong> Token tiers, ARIA patterns, versioning policy,
+      contribution models — each topic has its own page with examples and links to the primary
+      sources (W3C, WAI, MDN) rather than opinion.
+    </li>
+    <li>
+      <strong>You're in a conversation.</strong> A PM sketches a feature, a designer shows a comp, an
+      engineer asks "can we just build it?" Open the
+      <a href="/checklist/">pre-code checklist</a> and walk the questions together. It covers the
+      user, the domain, the surface, responsiveness, reuse, APIs, accessibility, AI interfaces, and
+      trade-offs — everything to answer before coding starts.
+    </li>
+    <li>
+      <strong>You need to point someone at the source.</strong> The
+      <a href="/resources/">resources page</a> collects the official specs and reference systems in
+      one place.
+    </li>
+  </ul>
+
+  <h2>The map</h2>
+  <dl>
+    <dt><a href="/foundation/">Foundation</a></dt>
+    <dd>What a design system is made of, its layers, principles, and how the parts relate.</dd>
+    <dt><a href="/tokens/">Tokens</a></dt>
+    <dd>Primitive → semantic → component tiers, naming, theming, and the W3C DTCG format.</dd>
+    <dt><a href="/components/">Components</a></dt>
+    <dd>Anatomy, states, API design, controlled vs uncontrolled, when a variant becomes a new component.</dd>
+    <dt><a href="/patterns/">Patterns</a></dt>
+    <dd>Compositions that solve recurring problems: forms, navigation, feedback, empty states, responsive behavior.</dd>
+    <dt><a href="/accessibility/">Accessibility</a></dt>
+    <dd>WCAG 2.2, ARIA done right, testing routines, and the numbers you keep reaching for.</dd>
+    <dt><a href="/guidance/">Guidance</a></dt>
+    <dd>Usage docs, content design, internationalization — the words and rules around the code.</dd>
+    <dt><a href="/governance/">Governance</a></dt>
+    <dd>Team models, contribution flow, versioning, deprecation, and measuring adoption.</dd>
+  </dl>
+
+  <div class="callout">
+    <p>
+      House rule for this manual: prefer the primary source over the hot take. Where a claim can be
+      grounded in W3C, WHATWG, or MDN documentation, the link is there. Where practice varies across
+      the industry, the page says so instead of picking a winner.
+    </p>
+  </div>
+</Base>

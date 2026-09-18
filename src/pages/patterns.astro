@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Patterns">
+  <h1>Patterns</h1>
+  <p class="lede">
+    Patterns are components composed into answers for recurring product problems. A component says
+    "here is a text field"; a pattern says "here is how we do address entry."
+  </p>
+
+  <h2>Forms and validation</h2>
+  <ul>
+    <li>Every input has a visible, programmatically associated <code>&lt;label&gt;</code> (placeholders are not labels).</li>
+    <li>Group related fields with <code>&lt;fieldset&gt;</code>/<code>&lt;legend&gt;</code>; one thing per page/step beats dense mega-forms for task completion (GOV.UK's research backs this).</li>
+    <li>Validate on submit or on blur-after-input, not on every keystroke; announce errors via the field's <code>aria-describedby</code> and set <code>aria-invalid</code>.</li>
+    <li>On failed submit, show an error summary at the top that links to each field, and move focus to it (supports WCAG 3.3.1/3.3.3).</li>
+    <li>Never rely on color alone to mark an error; pair icon/text.</li>
+    <li>Preserve user input on error. Losing data is the pattern's failure, not the user's.</li>
+  </ul>
+
+  <h2>Navigation and wayfinding</h2>
+  <ul>
+    <li>Landmarks (<code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>) plus one <code>h1</code> per page; heading levels don't skip.</li>
+    <li>Mark the current location (<code>aria-current="page"</code>).</li>
+    <li>A skip link is cheap and required in practice for keyboard users (WCAG 2.4.1).</li>
+    <li>Breadcrumbs for deep hierarchies; tabs only for peer views of one thing, never as page navigation.</li>
+  </ul>
+
+  <h2>Feedback and system status</h2>
+  <ul>
+    <li><strong>Loading:</strong> skeletons for known layouts, spinners for unknown; announce long operations to assistive tech via a live region.</li>
+    <li><strong>Toasts:</strong> for confirmations that need no action. Anything requiring a decision doesn't belong in a toast that disappears.</li>
+    <li><strong>Empty states:</strong> explain what would be here and offer the first action — an empty screen is an invitation, not a dead end.</li>
+    <li><strong>Errors:</strong> say what happened, what it means, what to do next. No blame, no jargon, no bare error codes.</li>
+    <li><strong>Destructive actions:</strong> confirm with the consequence spelled out, name the object ("Delete 'Q3 report'?"), and prefer undo over confirmation where reversal is possible.</li>
+  </ul>
+
+  <h2>Progressive disclosure</h2>
+  <p>
+    Show the common path; put the rest behind "advanced" affordances (<code>&lt;details&gt;</code>,
+    accordions, secondary panels). The pattern fails when the hidden thing is something most users
+    need — disclosure is for the tail, not the median.
+  </p>
+
+  <h2>Responsive behavior</h2>
+  <ul>
+    <li>Define breakpoints as tokens; product teams shouldn't invent px values.</li>
+    <li>Prefer intrinsic techniques (flex/grid <code>minmax</code>, <code>clamp()</code>) so layouts flex between breakpoints instead of snapping.</li>
+    <li>Container queries size a component to its container, not the viewport — the right tool for system components that land in unknown layouts.</li>
+    <li>Reflow requirement: content usable at 320px width / 400% zoom without horizontal scrolling (WCAG 1.4.10).</li>
+    <li>Touch targets: at least 24×24 CSS px (WCAG 2.5.8 AA); many platform guidelines recommend ~44px for primary controls.</li>
+  </ul>
+
+  <h2>When to mint a new pattern</h2>
+  <p>
+    Same trigger as components: a second real consumer. Document a pattern when you catch two teams
+    solving the same problem differently — the pattern page's job is to record the decision and its
+    rationale so the third team doesn't re-litigate it.
+  </p>
+
+  <div class="sources">
+    <h2>Primary reading</h2>
+    <ul>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/">ARIA APG — interaction patterns with keyboard specs</a></li>
+      <li><a href="https://design-system.service.gov.uk/patterns/">GOV.UK Design System — research-backed patterns</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries">MDN — container queries</a></li>
+      <li><a href="https://web.dev/patterns/">web.dev — coded UI patterns</a></li>
+      <li><a href="https://www.nngroup.com/articles/">Nielsen Norman Group — usability research articles</a></li>
+    </ul>
+  </div>
+</Base>

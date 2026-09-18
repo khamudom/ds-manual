@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Foundation">
+  <h1>Foundation</h1>
+  <p class="lede">
+    What a design system actually is, the layers it's built from, and the principles that keep it
+    coherent as it grows.
+  </p>
+
+  <h2>Definition</h2>
+  <p>
+    A design system is a shared language for building products: a set of reusable parts plus the
+    standards for using them. It is not a component library alone — the library is one artifact. A
+    reasonably complete system contains:
+  </p>
+  <ul>
+    <li><strong>Design tokens</strong> — named decisions (color, type, space, motion) stored as data.</li>
+    <li><strong>Components</strong> — coded, accessible building blocks with documented APIs.</li>
+    <li><strong>Patterns</strong> — compositions of components that solve recurring product problems.</li>
+    <li><strong>Guidelines</strong> — usage, content, and accessibility guidance around the parts.</li>
+    <li><strong>Governance</strong> — the people, processes, and versioning that keep it alive.</li>
+    <li><strong>Tooling</strong> — Figma libraries, lint rules, CI checks, documentation site.</li>
+  </ul>
+
+  <h2>The layer model</h2>
+  <p>
+    Most mature systems converge on a layered architecture. Each layer only depends on the one
+    below it, which is what makes theming and change management tractable:
+  </p>
+  <pre><code>foundations   raw values: hex codes, px, font files
+   ↓
+tokens        named decisions: color.text.primary, space.200
+   ↓
+primitives    unstyled behavior: focus trap, popover positioning
+   ↓
+components    Button, TextField, Dialog — token-styled, ARIA-correct
+   ↓
+patterns      form layout, filtering, onboarding, error recovery
+   ↓
+product       features composed from the layers above</code></pre>
+  <p>
+    The layering echoes Brad Frost's atomic design (atoms → molecules → organisms), but teams name
+    the layers differently. What matters is the dependency direction: product code shouldn't reach
+    past components into raw values, and components shouldn't hard-code what tokens can express.
+  </p>
+
+  <h2>Principles worth writing down</h2>
+  <p>
+    Principles only earn their keep when they settle arguments. Common ones that do real work:
+  </p>
+  <dl>
+    <dt>Accessible by default</dt>
+    <dd>
+      Conformance (WCAG 2.2 AA is the common target) is built into components, not left to product
+      teams to bolt on.
+    </dd>
+    <dt>Composition over configuration</dt>
+    <dd>
+      Prefer small parts that combine over god-components with 40 props. See
+      <a href="/components/">Components</a> for the trade-off.
+    </dd>
+    <dt>Platform-native first</dt>
+    <dd>
+      Use the HTML element or platform behavior before re-implementing it. A styled
+      <code>&lt;button&gt;</code> beats a <code>&lt;div role="button"&gt;</code> every time.
+    </dd>
+    <dt>Documented or it doesn't exist</dt>
+    <dd>A component without usage docs, props table, and a11y notes isn't shipped, it's leaked.</dd>
+    <dt>Changes are cheap, breaks are expensive</dt>
+    <dd>Additive evolution over rewrites; deprecate loudly, remove slowly. See <a href="/governance/">Governance</a>.</dd>
+  </dl>
+
+  <h2>What the UX engineer owns</h2>
+  <p>
+    At senior/principal level, the role sits at the seam between design and engineering. Typical
+    ownership:
+  </p>
+  <ul>
+    <li>The fidelity of the translation: design intent → tokens → component code.</li>
+    <li>Component API quality and consistency across the library.</li>
+    <li>Accessibility conformance of the shipped parts, with evidence (tests, audits).</li>
+    <li>The decision record: why a pattern exists, what was rejected, what it costs.</li>
+    <li>Enablement: docs, examples, office hours, code review for adopting teams.</li>
+  </ul>
+
+  <div class="sources">
+    <h2>Primary reading</h2>
+    <ul>
+      <li><a href="https://atomicdesign.bradfrost.com/">Atomic Design — Brad Frost (free book)</a></li>
+      <li><a href="https://www.designsystems.com/">designsystems.com — guides and case studies</a></li>
+      <li><a href="https://www.w3.org/WAI/standards-guidelines/">W3C WAI — standards overview</a></li>
+      <li><a href="https://designsystem.digital.gov/">USWDS — a public, well-documented reference system</a></li>
+      <li><a href="https://design-system.service.gov.uk/">GOV.UK Design System — research-backed patterns</a></li>
+    </ul>
+  </div>
+</Base>

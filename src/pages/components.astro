@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Components">
+  <h1>Components</h1>
+  <p class="lede">
+    The coded building blocks. Component quality is mostly API quality: a component's props are a
+    contract you will maintain for years.
+  </p>
+
+  <h2>Anatomy and states</h2>
+  <p>
+    Every component ships with its full state matrix designed and coded — the gaps are where product
+    teams improvise. Minimum set to account for:
+  </p>
+  <ul>
+    <li><strong>Interaction:</strong> default, hover, focus-visible, active, disabled.</li>
+    <li><strong>Data:</strong> empty, loading, partial, full, overflowing (long text, many items).</li>
+    <li><strong>Validation:</strong> error, warning, success — with text, never color alone (WCAG 1.4.1).</li>
+    <li><strong>Context:</strong> each theme, each density, RTL, 200% zoom, forced-colors mode.</li>
+  </ul>
+
+  <h2>API design</h2>
+  <h3>Composition vs configuration</h3>
+  <p>
+    A configured component takes everything as props (<code>&lt;Card title icon footerActions /&gt;</code>);
+    a composed one exposes parts (<code>&lt;Card&gt;&lt;Card.Header&gt;…</code>). Configuration is easier to
+    use and constrain; composition is more flexible and ages better. Common practice: compose the
+    structure, configure the appearance (variants, sizes).
+  </p>
+
+  <h3>Controlled vs uncontrolled</h3>
+  <p>
+    Inputs should support both: uncontrolled with <code>defaultValue</code> for simple cases,
+    controlled with <code>value</code> + <code>onChange</code> when product logic needs to own
+    state. Offering only one forces workarounds.
+  </p>
+
+  <h3>A contract worth copying</h3>
+  <pre><code>{`interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Visual prominence, not meaning */
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  /** Announced state: keeps the button focusable, sets aria-disabled */
+  loading?: boolean;
+  iconStart?: React.ReactNode;
+  iconEnd?: React.ReactNode;
+}`}</code></pre>
+  <p>Habits embedded in that snippet:</p>
+  <ul>
+    <li>Extend the native element's attributes — consumers keep <code>type</code>, <code>onClick</code>, <code>aria-*</code> for free.</li>
+    <li>Forward the ref; product code will need it for focus management.</li>
+    <li>Closed unions for variants: additions are cheap, renames are breaking changes.</li>
+    <li>Name by purpose (<code>danger</code>) or prominence (<code>primary</code>), never by color (<code>redButton</code>).</li>
+    <li>Boolean props read as states (<code>loading</code>, <code>disabled</code>), not instructions (<code>showSpinner</code>).</li>
+  </ul>
+
+  <h2>Accessibility is part of the component</h2>
+  <p>
+    For any interactive widget, start from the ARIA Authoring Practices Guide (APG) pattern — it
+    specifies the expected roles, states, and keyboard behavior for dialogs, tabs, comboboxes,
+    menus, and the rest. Rules of engagement:
+  </p>
+  <ul>
+    <li>Native HTML first; ARIA only to fill genuine gaps ("first rule of ARIA: don't use ARIA").</li>
+    <li>Keyboard support is spec, not enhancement: Tab order, Escape, arrow keys per the APG pattern.</li>
+    <li>Manage focus on open/close (dialogs return focus to their trigger).</li>
+    <li>Every component's docs include an accessibility section: what it handles, what the consumer must supply (e.g. the accessible name).</li>
+  </ul>
+
+  <h2>Variant or new component?</h2>
+  <p>Recurring governance question. A rough decision test:</p>
+  <ul>
+    <li>Same purpose and behavior, different look → <strong>variant</strong>.</li>
+    <li>Different keyboard/ARIA semantics → <strong>new component</strong> (a "link that looks like a button" is still a link).</li>
+    <li>The variant needs prop combinations that make no sense together → the component is trying to be two things; split it.</li>
+    <li>Only one product needs it → it lives in that product until a second consumer appears. See the <a href="/checklist/">checklist</a> on one-offs.</li>
+  </ul>
+
+  <h2>Definition of done</h2>
+  <ul>
+    <li>Tokens only — no hard-coded values a theme should control.</li>
+    <li>APG-conformant keyboard and screen-reader behavior, verified manually.</li>
+    <li>States matrix implemented, including RTL and forced-colors.</li>
+    <li>Docs: usage, do/don't, props table, a11y notes, examples.</li>
+    <li>Tests: unit, visual regression, and an automated a11y pass (axe) at minimum.</li>
+    <li>Reviewed by design and at least one adopting engineer.</li>
+  </ul>
+
+  <div class="sources">
+    <h2>Primary reading</h2>
+    <ul>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/">ARIA Authoring Practices Guide — patterns</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">MDN — HTML element reference</a></li>
+      <li><a href="https://www.w3.org/TR/html-aria/">W3C — ARIA in HTML (what's allowed where)</a></li>
+      <li><a href="https://inclusive-components.design/">Inclusive Components — worked examples</a></li>
+    </ul>
+  </div>
+</Base>

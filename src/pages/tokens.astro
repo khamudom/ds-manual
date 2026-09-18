@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Tokens">
+  <h1>Tokens</h1>
+  <p class="lede">
+    Design tokens are design decisions stored as named data — the smallest unit of the system, and
+    the layer that makes theming, consistency, and cross-platform delivery possible.
+  </p>
+
+  <h2>The three tiers</h2>
+  <dl>
+    <dt>1. Primitive (option) tokens</dt>
+    <dd>
+      Raw values with neutral names: <code>blue.600 = #1d4ed8</code>, <code>space.400 = 16px</code>.
+      They describe what exists, not what it's for. Never referenced directly by components.
+    </dd>
+    <dt>2. Semantic (alias) tokens</dt>
+    <dd>
+      Purpose-named references to primitives: <code>color.text.primary → gray.900</code>,
+      <code>color.border.danger → red.600</code>. This is the layer themes swap. Components should
+      consume these.
+    </dd>
+    <dt>3. Component tokens (optional)</dt>
+    <dd>
+      Scoped overrides for one component: <code>button.primary.bg → color.action.primary</code>.
+      Useful for fine-grained theming; skip the tier if it adds bureaucracy without a use case.
+    </dd>
+  </dl>
+
+  <h2>Naming</h2>
+  <p>
+    Most naming schemes follow some order of <em>category → concept → property → variant → state</em>
+    (Salesforce's CTI taxonomy popularized this). The exact grammar matters less than: one grammar,
+    applied everywhere, documented once. Test a proposed name by asking whether a new engineer could
+    predict it without looking it up.
+  </p>
+  <pre><code>color.text.primary
+color.text.on-accent
+color.bg.surface.raised
+color.border.danger
+space.200            /* t-shirt or numeric scale — pick one */
+font.size.heading-lg
+motion.duration.fast</code></pre>
+
+  <h2>The W3C community format</h2>
+  <p>
+    The Design Tokens Community Group (DTCG) defines a JSON interchange format so tools (Figma
+    plugins, Style Dictionary, etc.) can share tokens. Core shape: <code>$value</code>,
+    <code>$type</code>, optional <code>$description</code>, and <code>{'{group.token}'}</code>
+    references for aliases:
+  </p>
+  <pre><code>{`{
+  "color": {
+    "blue": {
+      "600": { "$value": "#1d4ed8", "$type": "color" }
+    },
+    "text": {
+      "link": {
+        "$value": "{color.blue.600}",
+        "$type": "color",
+        "$description": "Default link text"
+      }
+    }
+  }
+}`}</code></pre>
+  <p>
+    A translation tool such as Style Dictionary turns this single source into CSS custom properties,
+    iOS/Android values, and documentation.
+  </p>
+
+  <h2>Delivery on the web</h2>
+  <p>
+    CSS custom properties are the natural runtime target. Theme switching then becomes a scope
+    change, not a rebuild:
+  </p>
+  <pre><code>{`:root {
+  --color-text-primary: #1e222b;   /* semantic layer */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --color-text-primary: #e7e9ec; }
+}
+
+/* explicit user choice wins over OS preference */
+[data-theme='dark'] { --color-text-primary: #e7e9ec; }`}</code></pre>
+
+  <h2>Decisions to settle early</h2>
+  <ul>
+    <li><strong>Scale grammar:</strong> numeric (<code>space.100–900</code>) vs t-shirt (<code>sm/md/lg</code>). Numeric scales extend without renaming.</li>
+    <li><strong>Units:</strong> <code>rem</code> for type and most spacing (respects user font-size settings); document the exceptions.</li>
+    <li><strong>Who may add primitives:</strong> usually only the system team — otherwise the palette sprawls.</li>
+    <li><strong>Contrast guarantees:</strong> encode which text/background pairings are AA-safe so themes can't silently break conformance.</li>
+    <li><strong>Motion and elevation:</strong> tokenize them too, or they become the first sources of drift.</li>
+  </ul>
+
+  <div class="sources">
+    <h2>Primary reading</h2>
+    <ul>
+      <li><a href="https://tr.designtokens.org/format/">DTCG Design Tokens Format Module (spec draft)</a></li>
+      <li><a href="https://www.w3.org/community/design-tokens/">W3C Design Tokens Community Group</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN — Using CSS custom properties</a></li>
+      <li><a href="https://styledictionary.com/">Style Dictionary — token translation tooling</a></li>
+    </ul>
+  </div>
+</Base>

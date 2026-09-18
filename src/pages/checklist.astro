@@ -1,0 +1,242 @@
+---
+import Base from '../layouts/Base.astro';
+
+const groups = [
+  {
+    id: 'user',
+    title: 'User & problem',
+    items: [
+      'Who exactly is the user of this piece of UI, and what job are they trying to get done?',
+      'What evidence do we have (research, support tickets, analytics) that this is a real problem?',
+      'What does success look like, and how will we measure it after shipping?',
+      'What happens if we build nothing? Is there an existing path users already take?',
+    ],
+  },
+  {
+    id: 'domain',
+    title: 'Domain & data',
+    items: [
+      'What are the entities and their states? Have we listed the edge cases (zero, one, many, too many)?',
+      'What are the empty, loading, partial, error, and permission-denied states?',
+      'What data volumes are realistic — 10 items or 10,000? Does the design survive both?',
+      'Who is allowed to see or do this? How do we render for users without permission?',
+      'Are there compliance, privacy, or audit requirements touching this data?',
+    ],
+  },
+  {
+    id: 'surface',
+    title: 'Surface & platform',
+    items: [
+      'Which surface(s) does this ship on — web app, marketing site, mobile web, native, embedded?',
+      'What input modes must work: touch, keyboard, pointer, screen reader, voice?',
+      'What browsers/devices are in support, and does anything here need a fallback?',
+      'Does this surface have its own theme, density, or constraints the system must respect?',
+    ],
+  },
+  {
+    id: 'responsive',
+    title: 'Responsive & layout',
+    items: [
+      'What does this look like at 320px wide and at 400% zoom, with no horizontal scrolling?',
+      'Which breakpoints/container sizes change the layout, and are they system tokens?',
+      'Should this respond to its container (container queries) rather than the viewport?',
+      'How does it behave with long content — translation expansion, long names, wrapped text?',
+      'Are touch targets at least 24×24 CSS px (larger for primary actions)?',
+    ],
+  },
+  {
+    id: 'reuse',
+    title: 'Reuse & one-offs',
+    items: [
+      'Do we already have a component or pattern for this? Have we actually searched the docs and Figma library?',
+      'If it almost fits: is the gap a variant, a composition, or genuinely new semantics?',
+      'Is this a one-off? If so, it lives in the product — what would promote it to the system later (a second consumer)?',
+      'If we build it locally, who is accountable for it, and have we recorded the decision?',
+      'Are we about to fork/detach a system component? What misfit is driving that, and has the system team heard it?',
+    ],
+  },
+  {
+    id: 'api',
+    title: 'Component API & architecture',
+    items: [
+      'What is the prop contract — variants, sizes, states? Are names consistent with the rest of the library?',
+      'Controlled, uncontrolled, or both? Who owns the state?',
+      'Composition or configuration — and does the choice match how consumers will actually use it?',
+      'Does it extend native element attributes and forward refs?',
+      'Which tokens does it consume? Any hard-coded value a theme should own?',
+      'What is explicitly out of scope for v1, and is that written down?',
+    ],
+  },
+  {
+    id: 'a11y',
+    title: 'Accessibility',
+    items: [
+      'Which ARIA APG pattern (if any) applies, and are we following its keyboard spec?',
+      'Can the entire task be completed with keyboard alone? Where does focus go on open, close, and error?',
+      'Does every element have an accessible name, role, and state? Is color never the only signal?',
+      'Do text and UI contrast ratios pass AA in every theme?',
+      'How are async updates announced (live regions)? Is motion gated on prefers-reduced-motion?',
+      'Who runs the screen reader pass, and with which pairing (NVDA/Chrome, VoiceOver/Safari)?',
+    ],
+  },
+  {
+    id: 'content',
+    title: 'Content & internationalization',
+    items: [
+      'Do we have real copy — labels, errors, empty states — or are we designing around lorem ipsum?',
+      'Do button labels say what they do, and does the vocabulary match the rest of the product?',
+      'Will this be translated? Does the layout survive 2× text length and RTL?',
+      'Are dates, numbers, and plurals formatted via Intl, not string concatenation?',
+    ],
+  },
+  {
+    id: 'states',
+    title: 'States & interaction detail',
+    items: [
+      'Is every state designed — hover, focus-visible, active, disabled, loading, error, empty, overflow?',
+      'When does validation fire, and where do errors appear and get announced?',
+      'Optimistic or pessimistic updates? What does the user see during latency, and on failure?',
+      'Is the action reversible? Undo, confirmation, or neither — and why?',
+    ],
+  },
+  {
+    id: 'apis',
+    title: 'APIs & integration',
+    items: [
+      'Is the data contract agreed with the backend — shapes, nullability, error codes?',
+      'How do loading, partial, and failure responses map to UI states?',
+      'Pagination, caching, and refresh: who owns them, and what does stale data look like?',
+      'Is this behind a feature flag? What is the rollout and rollback plan?',
+      'Any rate limits, timeouts, or offline behavior the UI must expose honestly?',
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'AI interfaces (when relevant)',
+    items: [
+      'The output is non-deterministic — how do we set expectations, and what does a wrong answer cost the user?',
+      'What are the loading/streaming states? Can users read, stop, or interrupt generation in progress?',
+      'How do we show provenance — sources, citations, confidence — so users can verify rather than trust?',
+      'What are the refusal, empty, and failure states, and do they explain what to try instead?',
+      'Can users correct, edit, regenerate, or undo AI output? Is a human always in control of consequential actions?',
+      'How is feedback captured (thumbs, reports), and where does it go?',
+      'What data leaves the user\u2019s context to power this, and is that disclosed?',
+      'Does latency match the interaction — streaming for long generations, and honest progress otherwise?',
+    ],
+  },
+  {
+    id: 'quality',
+    title: 'Performance & quality',
+    items: [
+      'What is the bundle/asset cost, and is it acceptable for this surface?',
+      'Any layout shift, image sizing, or font loading issues (Core Web Vitals)?',
+      'What analytics events prove the success metric from question one?',
+      'What is the test plan — unit, visual regression, automated a11y, manual passes?',
+    ],
+  },
+  {
+    id: 'tradeoffs',
+    title: 'Trade-offs & alignment',
+    items: [
+      'What are we trading — speed vs completeness, flexibility vs consistency — and is the choice explicit?',
+      'What is the deadline forcing us to cut, and is that debt recorded with an owner?',
+      'Who signs off — design, a11y, engineering — and have they seen this list?',
+      'Where is the decision recorded so the next person doesn\u2019t re-litigate it?',
+    ],
+  },
+];
+
+const total = groups.reduce((n, g) => n + g.items.length, 0);
+---
+
+<Base title="Pre-code checklist">
+  <h1>Pre-code checklist</h1>
+  <p class="lede">
+    The questions to answer before anyone writes code. Use it live in a conversation with a PM,
+    designer, or engineer — skip groups that don't apply, but skip them on purpose. Progress is
+    saved in this browser.
+  </p>
+
+  <div class="progress" role="group" aria-label="Checklist progress">
+    <div class="progress-row">
+      <span class="progress-count" id="progress-count" aria-live="polite">0 / {total}</span>
+      <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+      <button class="reset-btn" type="button" id="reset-checklist">Reset</button>
+    </div>
+  </div>
+
+  {
+    groups.map((group) => (
+      <details class="check-group" open>
+        <summary>{group.title}</summary>
+        <ul>
+          {group.items.map((item, i) => (
+            <li>
+              <label>
+                <input type="checkbox" data-check-id={`${group.id}-${i}`} />
+                <span>{item}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </details>
+    ))
+  }
+
+  <div class="callout">
+    <p>
+      Not every question needs a long answer — "not applicable, because…" is a valid answer. The
+      failure mode this list prevents is the question nobody asked.
+    </p>
+  </div>
+
+  <script>
+    const KEY = 'ds-checklist-v1';
+    const boxes = Array.from(
+      document.querySelectorAll<HTMLInputElement>('input[data-check-id]')
+    );
+    const countEl = document.getElementById('progress-count');
+    const fillEl = document.getElementById('progress-fill');
+    const resetBtn = document.getElementById('reset-checklist');
+
+    function load(): Record<string, boolean> {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) ?? '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function save(state: Record<string, boolean>) {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+      } catch {
+        /* storage unavailable — checklist still works for the session */
+      }
+    }
+
+    function render() {
+      const done = boxes.filter((b) => b.checked).length;
+      if (countEl) countEl.textContent = `${done} / ${boxes.length}`;
+      if (fillEl) fillEl.style.width = `${(done / boxes.length) * 100}%`;
+    }
+
+    const state = load();
+    for (const box of boxes) {
+      box.checked = Boolean(state[box.dataset.checkId ?? '']);
+      box.addEventListener('change', () => {
+        state[box.dataset.checkId ?? ''] = box.checked;
+        save(state);
+        render();
+      });
+    }
+
+    resetBtn?.addEventListener('click', () => {
+      for (const box of boxes) box.checked = false;
+      save({});
+      render();
+    });
+
+    render();
+  </script>
+</Base>
