@@ -3,50 +3,28 @@
 
 <div class="ai-chat" data-ai-chat>
   <button
-    class="ai-chat-fab"
+    class="ai-chat-ask"
     type="button"
     aria-expanded="false"
     aria-controls="ai-chat-panel"
     data-ai-chat-toggle
   >
-    <span class="ai-chat-fab-icon" aria-hidden="true">
-      <svg class="ai-chat-icon-open" viewBox="0 0 24 24" width="22" height="22" fill="none">
-        <path
-          d="M5 18.5V7.75A2.75 2.75 0 0 1 7.75 5h8.5A2.75 2.75 0 0 1 19 7.75v6A2.75 2.75 0 0 1 16.25 16.5H9.1L5 18.5Z"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linejoin="round"></path>
-        <path
-          d="M9 9.75h6M9 12.75h4"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"></path>
-      </svg>
-      <svg class="ai-chat-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none">
-        <path
-          d="M6.5 6.5l11 11M17.5 6.5l-11 11"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"></path>
-      </svg>
-    </span>
-    <span class="visually-hidden" data-ai-chat-label>Ask the design system assistant</span>
+    Ask AI
   </button>
+
+  <div class="ai-chat-backdrop" data-ai-chat-backdrop hidden></div>
 
   <section
     id="ai-chat-panel"
     class="ai-chat-panel"
     role="dialog"
-    aria-modal="false"
+    aria-modal="true"
     aria-labelledby="ai-chat-title"
     hidden
     data-ai-chat-panel
   >
     <header class="ai-chat-header">
-      <div>
-        <h2 id="ai-chat-title">Design system assistant</h2>
-        <p class="ai-chat-sub">Ask about tokens, components, a11y, patterns, and governance.</p>
-      </div>
+      <p class="ai-chat-eyebrow" id="ai-chat-title">Design system assistant</p>
       <button class="ai-chat-close" type="button" data-ai-chat-close aria-label="Close assistant">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
           <path
@@ -58,39 +36,102 @@
       </button>
     </header>
 
-    <div class="ai-chat-messages" data-ai-chat-messages aria-live="polite">
-      <div class="ai-chat-bubble ai-chat-bubble-assistant" data-role="assistant">
-        <p>
-          Ask anything design-system related: token tiers, component APIs, ARIA patterns,
-          contribution models, or the pre-code checklist.
-        </p>
+    <div class="ai-chat-body" data-ai-chat-body>
+      <div class="ai-chat-empty" data-ai-chat-empty>
+        <h2 class="ai-chat-prompt">What can I help you with?</h2>
+        <ul class="ai-chat-suggestions">
+          <li>
+            <button type="button" data-ai-suggestion="When should a variant become a new component?">
+              <span class="ai-chat-suggestion-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                  <circle cx="12" cy="12" r="8.25" stroke="currentColor" stroke-width="1.5"></circle>
+                  <path
+                    d="M12 10.5v5M12 8.25h.01"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"></path>
+                </svg>
+              </span>
+              Ask a question
+            </button>
+          </li>
+          <li>
+            <button type="button" data-ai-suggestion="Explain primitive vs semantic design tokens.">
+              <span class="ai-chat-suggestion-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                  <circle cx="11" cy="11" r="6.25" stroke="currentColor" stroke-width="1.5"></circle>
+                  <path
+                    d="M16 16l3.5 3.5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"></path>
+                </svg>
+              </span>
+              Find a token concept
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              data-ai-suggestion="What accessibility checks should I run before shipping a component?"
+            >
+              <span class="ai-chat-suggestion-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                  <path
+                    d="M7 4.75h10A2.25 2.25 0 0 1 19.25 7v10A2.25 2.25 0 0 1 17 19.25H7A2.25 2.25 0 0 1 4.75 17V7A2.25 2.25 0 0 1 7 4.75Z"
+                    stroke="currentColor"
+                    stroke-width="1.5"></path>
+                  <path
+                    d="M8.5 9.5h7M8.5 12.5h7M8.5 15.5h4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"></path>
+                </svg>
+              </span>
+              Build a pre-ship checklist
+            </button>
+          </li>
+        </ul>
       </div>
+
+      <div class="ai-chat-messages" data-ai-chat-messages aria-live="polite" hidden></div>
     </div>
 
-    <form class="ai-chat-form" data-ai-chat-form>
-      <label class="visually-hidden" for="ai-chat-input">Your question</label>
-      <textarea
-        id="ai-chat-input"
-        class="ai-chat-input"
-        name="message"
-        rows="2"
-        maxlength="2000"
-        placeholder="e.g. When should a variant become a new component?"
-        data-ai-chat-input
-      ></textarea>
-      <button class="ai-chat-send" type="submit" data-ai-chat-send>Send</button>
-    </form>
-    <p class="ai-chat-status" data-ai-chat-status role="status" hidden></p>
+    <div class="ai-chat-composer">
+      <form class="ai-chat-form" data-ai-chat-form>
+        <label class="visually-hidden" for="ai-chat-input">Ask about the design system</label>
+        <input
+          id="ai-chat-input"
+          class="ai-chat-input"
+          name="message"
+          type="text"
+          autocomplete="off"
+          enterkeyhint="send"
+          maxlength="2000"
+          placeholder="Ask about tokens, components, a11y…"
+          data-ai-chat-input
+        />
+        <button class="ai-chat-send" type="submit" data-ai-chat-send aria-label="Send">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+            <path
+              d="M12 18.5V5.5M12 5.5l-5 5M12 5.5l5 5"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </form>
+      <p class="ai-chat-status" data-ai-chat-status role="status" hidden></p>
+    </div>
   </section>
 </div>
 
 <style>
   .ai-chat {
-    position: fixed;
-    inset-inline-end: max(1rem, env(safe-area-inset-right));
-    inset-block-end: max(1rem, env(safe-area-inset-bottom));
-    z-index: 40;
+    --ai-sheet-offset: 0px;
     font-family: var(--font-ui);
+    z-index: 50;
   }
 
   .visually-hidden {
@@ -105,161 +146,205 @@
     border: 0;
   }
 
-  .ai-chat-fab {
-    width: 3.25rem;
-    height: 3.25rem;
+  .ai-chat-ask {
+    position: fixed;
+    inset-inline-end: max(1rem, env(safe-area-inset-right));
+    inset-block-end: max(1rem, env(safe-area-inset-bottom));
+    z-index: 51;
+    appearance: none;
+    border: 1px solid var(--line);
     border-radius: 999px;
-    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
-    background: var(--accent);
-    color: var(--white);
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    box-shadow: 0 10px 28px color-mix(in srgb, var(--ink) 18%, transparent);
-    transition:
-      transform 180ms ease,
-      background-color 180ms ease,
-      box-shadow 180ms ease;
-  }
-
-  .ai-chat-fab:hover {
-    background: var(--accent-strong);
-    transform: translateY(-1px);
-  }
-
-  .ai-chat-fab[aria-expanded='true'] {
     background: var(--bg-raised);
     color: var(--ink);
-    border-color: var(--line);
-  }
-
-  .ai-chat-fab-icon {
-    display: grid;
-    place-items: center;
-  }
-
-  .ai-chat-fab-icon svg {
-    grid-area: 1 / 1;
-  }
-
-  .ai-chat-icon-close {
-    opacity: 0;
-    transform: scale(0.7);
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    padding: 0.7rem 1.15rem;
+    cursor: pointer;
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--ink) 14%, transparent);
     transition:
-      opacity 160ms ease,
-      transform 160ms ease;
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      opacity 160ms ease;
   }
 
-  .ai-chat-icon-open {
-    opacity: 1;
-    transform: scale(1);
-    transition:
-      opacity 160ms ease,
-      transform 160ms ease;
+  .ai-chat-ask:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 32px color-mix(in srgb, var(--ink) 18%, transparent);
   }
 
-  .ai-chat-fab[aria-expanded='true'] .ai-chat-icon-open {
+  .ai-chat-ask[aria-expanded='true'],
+  .ai-chat[data-open] .ai-chat-ask {
     opacity: 0;
-    transform: scale(0.7);
+    pointer-events: none;
+    transform: translateY(0.35rem);
   }
 
-  .ai-chat-fab[aria-expanded='true'] .ai-chat-icon-close {
-    opacity: 1;
-    transform: scale(1);
+  .ai-chat-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 52;
+    background: color-mix(in srgb, var(--ink) 28%, transparent);
+    animation: ai-fade-in 200ms ease;
+  }
+
+  .ai-chat-backdrop[hidden] {
+    display: none;
   }
 
   .ai-chat-panel {
-    position: absolute;
-    inset-inline-end: 0;
-    inset-block-end: calc(3.25rem + 0.75rem);
-    width: min(22.5rem, calc(100vw - 2rem));
-    max-height: min(34rem, calc(100dvh - 6rem));
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: var(--ai-sheet-offset);
+    z-index: 53;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-height: min(78dvh, calc(100dvh - var(--ai-sheet-offset) - 0.75rem));
     background: var(--bg-raised);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 16%, transparent);
+    border-bottom: 0;
+    border-radius: 22px 22px 0 0;
+    box-shadow: 0 -18px 48px color-mix(in srgb, var(--ink) 16%, transparent);
     overflow: hidden;
-    transform-origin: bottom right;
-    animation: ai-chat-in 180ms ease;
+    transform: translateY(0);
+    animation: ai-sheet-in 260ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .ai-chat-panel[hidden] {
     display: none;
   }
 
-  @keyframes ai-chat-in {
+  @keyframes ai-sheet-in {
     from {
-      opacity: 0;
-      transform: translateY(0.5rem) scale(0.98);
+      opacity: 0.6;
+      transform: translateY(100%);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ai-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 
   .ai-chat-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: var(--space-2);
-    padding: var(--space-3);
-    border-bottom: 1px solid var(--line);
-    background: color-mix(in srgb, var(--bg-code) 70%, var(--bg-raised));
+    padding: 0.9rem 1.1rem 0.55rem;
+    flex-shrink: 0;
   }
 
-  .ai-chat-header h2 {
+  .ai-chat-eyebrow {
     margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 1rem;
-    font-weight: 650;
-    letter-spacing: -0.01em;
-  }
-
-  .ai-chat-sub {
-    margin: 0.25rem 0 0;
     font-size: 0.8125rem;
+    font-weight: 550;
     color: var(--ink-soft);
-    line-height: 1.4;
   }
 
   .ai-chat-close {
     flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     display: grid;
     place-items: center;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--ink-soft);
+    border: 0;
+    border-radius: 999px;
+    background: var(--bg-code);
+    color: var(--ink);
     cursor: pointer;
   }
 
   .ai-chat-close:hover {
+    background: color-mix(in srgb, var(--accent) 16%, var(--bg-code));
+  }
+
+  .ai-chat-body {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-chat-empty {
+    padding: 1.25rem 1.25rem 0.75rem;
+  }
+
+  .ai-chat-prompt {
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border: 0;
+    font-size: clamp(1.5rem, 4.5vw, 1.85rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
     color: var(--ink);
-    border-color: var(--line);
-    background: var(--bg);
+  }
+
+  .ai-chat-suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .ai-chat-suggestions button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 1rem;
+    text-align: left;
+    padding: 0.85rem 0.15rem;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  .ai-chat-suggestions button:hover {
+    background: color-mix(in srgb, var(--bg-code) 80%, transparent);
+  }
+
+  .ai-chat-suggestion-icon {
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    color: var(--ink-soft);
+    flex-shrink: 0;
   }
 
   .ai-chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: var(--space-3);
+    padding: 0.35rem 1.15rem 1rem;
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    min-height: 12rem;
+  }
+
+  .ai-chat-messages[hidden] {
+    display: none;
   }
 
   .ai-chat-bubble {
-    max-width: 95%;
-    padding: 0.7rem 0.85rem;
-    border-radius: 12px;
-    font-size: 0.9375rem;
+    max-width: 92%;
+    padding: 0.75rem 0.9rem;
+    border-radius: 14px;
+    font-size: 0.975rem;
     line-height: 1.5;
   }
 
@@ -291,29 +376,35 @@
     font-style: italic;
   }
 
+  .ai-chat-composer {
+    flex-shrink: 0;
+    padding: 0.65rem 1rem calc(0.85rem + env(safe-area-inset-bottom));
+    border-top: 1px solid transparent;
+    background: var(--bg-raised);
+  }
+
   .ai-chat-form {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--space-2);
-    align-items: end;
-    padding: var(--space-2) var(--space-3) var(--space-3);
-    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 3.1rem;
+    padding: 0.35rem 0.4rem 0.35rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
   }
 
   .ai-chat-input {
-    width: 100%;
-    resize: none;
-    min-height: 2.75rem;
-    max-height: 7rem;
-    font: inherit;
-    font-family: var(--font-ui);
-    font-size: 0.9375rem;
-    line-height: 1.4;
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
     color: var(--ink);
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 0.65rem 0.75rem;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0.55rem 0;
   }
 
   .ai-chat-input::placeholder {
@@ -321,14 +412,15 @@
   }
 
   .ai-chat-send {
-    font-family: var(--font-ui);
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--white);
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 999px;
     background: var(--accent);
-    border: 1px solid transparent;
-    border-radius: 10px;
-    padding: 0.7rem 0.95rem;
+    color: var(--white);
     cursor: pointer;
   }
 
@@ -343,8 +435,7 @@
   }
 
   .ai-chat-status {
-    margin: 0;
-    padding: 0 var(--space-3) var(--space-3);
+    margin: 0.55rem 0.35rem 0;
     font-size: 0.8125rem;
     color: var(--ink-soft);
   }
@@ -354,11 +445,8 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    .ai-chat-fab {
-      color: #102422;
-    }
-
-    .ai-chat-fab[aria-expanded='true'] {
+    .ai-chat-ask {
+      background: var(--bg-raised);
       color: var(--ink);
     }
 
@@ -371,10 +459,19 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @media (min-width: 860px) {
     .ai-chat-panel {
-      width: min(100vw - 1.5rem, 22.5rem);
-      max-height: min(70dvh, calc(100dvh - 5.5rem));
+      inset-inline: auto;
+      inset-inline-end: max(1rem, env(safe-area-inset-right));
+      width: min(28rem, calc(100vw - 2rem));
+      max-height: min(40rem, calc(100dvh - var(--ai-sheet-offset) - 1.5rem));
+      border-radius: 22px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .ai-chat-composer {
+      padding-bottom: 0.95rem;
     }
   }
 </style>
@@ -386,17 +483,21 @@
   if (root) {
     const toggle = root.querySelector<HTMLButtonElement>('[data-ai-chat-toggle]');
     const closeBtn = root.querySelector<HTMLButtonElement>('[data-ai-chat-close]');
+    const backdrop = root.querySelector<HTMLElement>('[data-ai-chat-backdrop]');
     const panel = root.querySelector<HTMLElement>('[data-ai-chat-panel]');
-    const label = root.querySelector<HTMLElement>('[data-ai-chat-label]');
     const form = root.querySelector<HTMLFormElement>('[data-ai-chat-form]');
-    const input = root.querySelector<HTMLTextAreaElement>('[data-ai-chat-input]');
+    const input = root.querySelector<HTMLInputElement>('[data-ai-chat-input]');
     const sendBtn = root.querySelector<HTMLButtonElement>('[data-ai-chat-send]');
     const messagesEl = root.querySelector<HTMLElement>('[data-ai-chat-messages]');
+    const emptyEl = root.querySelector<HTMLElement>('[data-ai-chat-empty]');
+    const bodyEl = root.querySelector<HTMLElement>('[data-ai-chat-body]');
     const statusEl = root.querySelector<HTMLElement>('[data-ai-chat-status]');
+    const suggestionBtns = root.querySelectorAll<HTMLButtonElement>('[data-ai-suggestion]');
 
     const history: ChatTurn[] = [];
     let open = false;
     let pending = false;
+    let previousOverflow = '';
 
     function setStatus(text: string, tone: 'info' | 'error' = 'info') {
       if (!statusEl) return;
@@ -411,21 +512,48 @@
       statusEl.dataset.tone = tone;
     }
 
-    function setOpen(next: boolean) {
+    function syncKeyboardOffset() {
+      const vv = window.visualViewport;
+      if (!vv || !open) {
+        root.style.setProperty('--ai-sheet-offset', '0px');
+        return;
+      }
+      const occluded = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      root.style.setProperty('--ai-sheet-offset', `${occluded}px`);
+    }
+
+    function setOpen(next: boolean, { focusInput = true }: { focusInput?: boolean } = {}) {
       open = next;
-      if (!toggle || !panel || !label) return;
+      if (!toggle || !panel || !backdrop) return;
+
       toggle.setAttribute('aria-expanded', String(open));
+      root.toggleAttribute('data-open', open);
       panel.hidden = !open;
-      label.textContent = open ? 'Close design system assistant' : 'Ask the design system assistant';
+      backdrop.hidden = !open;
+
       if (open) {
-        input?.focus();
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        syncKeyboardOffset();
+        if (focusInput) {
+          // Defer so the sheet can paint before the mobile keyboard rises.
+          requestAnimationFrame(() => input?.focus());
+        }
       } else {
+        document.body.style.overflow = previousOverflow;
+        root.style.setProperty('--ai-sheet-offset', '0px');
         toggle.focus();
       }
     }
 
+    function showConversation() {
+      if (emptyEl) emptyEl.hidden = true;
+      if (messagesEl) messagesEl.hidden = false;
+    }
+
     function appendBubble(role: 'user' | 'assistant', content: string, pendingBubble = false) {
       if (!messagesEl) return null;
+      showConversation();
       const bubble = document.createElement('div');
       bubble.className = `ai-chat-bubble ai-chat-bubble-${role}${pendingBubble ? ' ai-chat-bubble-pending' : ''}`;
       bubble.dataset.role = role;
@@ -433,7 +561,7 @@
       p.textContent = content;
       bubble.appendChild(p);
       messagesEl.appendChild(bubble);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      bodyEl && (bodyEl.scrollTop = bodyEl.scrollHeight);
       return bubble;
     }
 
@@ -446,37 +574,18 @@
         p.textContent = part.replace(/\n/g, ' ').trim();
         if (p.textContent) bubble.appendChild(p);
       }
-      messagesEl && (messagesEl.scrollTop = messagesEl.scrollHeight);
+      bodyEl && (bodyEl.scrollTop = bodyEl.scrollHeight);
     }
 
-    toggle?.addEventListener('click', () => setOpen(!open));
-    closeBtn?.addEventListener('click', () => setOpen(false));
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && open) {
-        event.preventDefault();
-        setOpen(false);
-      }
-    });
-
-    input?.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault();
-        form?.requestSubmit();
-      }
-    });
-
-    form?.addEventListener('submit', async (event) => {
-      event.preventDefault();
+    async function sendMessage(content: string) {
       if (!input || pending) return;
-
-      const content = input.value.trim();
-      if (!content) return;
+      const text = content.trim();
+      if (!text) return;
 
       setStatus('');
       input.value = '';
-      appendBubble('user', content);
-      history.push({ role: 'user', content });
+      appendBubble('user', text);
+      history.push({ role: 'user', content: text });
 
       const thinking = appendBubble('assistant', 'Thinking…', true);
       pending = true;
@@ -510,6 +619,35 @@
         input.disabled = false;
         input.focus();
       }
+    }
+
+    toggle?.addEventListener('click', () => setOpen(true, { focusInput: false }));
+    closeBtn?.addEventListener('click', () => setOpen(false));
+    backdrop?.addEventListener('click', () => setOpen(false));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && open) {
+        event.preventDefault();
+        setOpen(false);
+      }
     });
+
+    for (const btn of suggestionBtns) {
+      btn.addEventListener('click', () => {
+        const suggestion = btn.dataset.aiSuggestion ?? '';
+        if (!suggestion) return;
+        void sendMessage(suggestion);
+      });
+    }
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      void sendMessage(input?.value ?? '');
+    });
+
+    const vv = window.visualViewport;
+    vv?.addEventListener('resize', syncKeyboardOffset);
+    vv?.addEventListener('scroll', syncKeyboardOffset);
+    window.addEventListener('resize', syncKeyboardOffset);
   }
 </script>
