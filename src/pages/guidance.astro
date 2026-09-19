@@ -12,18 +12,18 @@ import Base from '../layouts/Base.astro';
   <h2>Anatomy of good usage docs</h2>
   <p>A component page that actually gets used tends to contain, in order:</p>
   <ol>
-    <li><strong>What it is</strong> — one sentence, plus a live example.</li>
-    <li><strong>When to use / when not to</strong> — including what to use instead ("for navigation, use Link").</li>
-    <li><strong>Do / Don't pairs</strong> — screenshots beat paragraphs for this.</li>
-    <li><strong>Behavior</strong> — states, keyboard interaction, responsive rules.</li>
-    <li><strong>Content guidance</strong> — label length, capitalization, tone for this component.</li>
-    <li><strong>Accessibility</strong> — what's handled, what the consumer must provide.</li>
-    <li><strong>API reference</strong> — props table, generated from source where possible so it can't drift.</li>
+    <li><strong>What it is:</strong> one sentence, plus a live example.</li>
+    <li><strong>When to use / when not to:</strong> including what to use instead ("for navigation, use Link").</li>
+    <li><strong>Do / Don't pairs:</strong> screenshots beat paragraphs for this.</li>
+    <li><strong>Behavior:</strong> states, keyboard interaction, responsive rules.</li>
+    <li><strong>Content guidance:</strong> label length, capitalization, tone for this component.</li>
+    <li><strong>Accessibility:</strong> what's handled, what the consumer must provide.</li>
+    <li><strong>API reference:</strong> props table, generated from source where possible so it can't drift.</li>
   </ol>
 
   <h2>Content design rules that scale</h2>
   <ul>
-    <li><strong>Buttons say what they do:</strong> "Save changes," not "Submit" or "OK." The verb survives the whole flow — a "Publish" button yields a "Published" confirmation.</li>
+    <li><strong>Buttons say what they do:</strong> "Save changes," not "Submit" or "OK." The verb survives the whole flow. A "Publish" button yields a "Published" confirmation.</li>
     <li><strong>Sentence case</strong> for UI text is the common modern default; whatever the choice, encode it once and lint for it.</li>
     <li><strong>Errors:</strong> what happened, why (if useful), what to do next. Never blame, never a bare code, never "an error occurred."</li>
     <li><strong>Plain language:</strong> name things by what users understand, not how the system is built ("notifications," not "webhook config"). Reading-level guidance exists in WCAG 3.1.5 (AAA) and plainlanguage.gov.</li>
@@ -32,7 +32,7 @@ import Base from '../layouts/Base.astro';
 
   <h2>Internationalization</h2>
   <ul>
-    <li><strong>Expansion:</strong> translations run 30–200% longer than English; design for it (German for stress-testing width, avoid fixed-width labels, plan truncation rules).</li>
+    <li><strong>Expansion:</strong> translations run 30-200% longer than English; design for it (German for stress-testing width, avoid fixed-width labels, plan truncation rules).</li>
     <li><strong>Direction:</strong> support RTL via CSS logical properties (<code>margin-inline-start</code>, not <code>margin-left</code>) and <code>dir</code> attributes; mirror directional icons, but not universally (media controls stay).</li>
     <li><strong>Formats:</strong> dates, numbers, currency, and plurals via <code>Intl</code> APIs, never string concatenation; sentences aren't assembled from fragments because word order varies.</li>
     <li><strong>Characters:</strong> line-height and font stacks that survive CJK, Arabic, and diacritics; declare <code>lang</code> correctly for hyphenation and screen-reader pronunciation.</li>
@@ -41,18 +41,18 @@ import Base from '../layouts/Base.astro';
   <h2>Voice and tone</h2>
   <p>
     Voice is the product's stable personality; tone flexes with context (an error reads differently
-    from an empty state). The system's job is a short, example-heavy guide — three adjectives and a
+    from an empty state). The system's job is a short, example-heavy guide. Three adjectives and a
     table of "we say / we don't say" does more than a manifesto.
   </p>
 
   <div class="sources">
     <h2>Primary reading</h2>
     <ul>
-      <li><a href="https://www.w3.org/International/techniques/authoring-html">W3C i18n — authoring techniques</a></li>
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values">MDN — CSS logical properties</a></li>
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl">MDN — Intl API</a></li>
-      <li><a href="https://www.plainlanguage.gov/">plainlanguage.gov — US federal plain language guidance</a></li>
-      <li><a href="https://design-system.service.gov.uk/styles/">GOV.UK — content and style guidance</a></li>
+      <li><a href="https://www.w3.org/International/techniques/authoring-html">W3C i18n: authoring techniques</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values">MDN: CSS logical properties</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl">MDN: Intl API</a></li>
+      <li><a href="https://www.plainlanguage.gov/">plainlanguage.gov: US federal plain language guidance</a></li>
+      <li><a href="https://design-system.service.gov.uk/styles/">GOV.UK: content and style guidance</a></li>
     </ul>
   </div>
 </Base>

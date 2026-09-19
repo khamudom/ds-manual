@@ -18,7 +18,7 @@ const groups = [
     items: [
       'What are the entities and their states? Have we listed the edge cases (zero, one, many, too many)?',
       'What are the empty, loading, partial, error, and permission-denied states?',
-      'What data volumes are realistic — 10 items or 10,000? Does the design survive both?',
+      'What data volumes are realistic (10 items or 10,000)? Does the design survive both?',
       'Who is allowed to see or do this? How do we render for users without permission?',
       'Are there compliance, privacy, or audit requirements touching this data?',
     ],
@@ -27,7 +27,7 @@ const groups = [
     id: 'surface',
     title: 'Surface & platform',
     items: [
-      'Which surface(s) does this ship on — web app, marketing site, mobile web, native, embedded?',
+      'Which surface(s) does this ship on (web app, marketing site, mobile web, native, embedded)?',
       'What input modes must work: touch, keyboard, pointer, screen reader, voice?',
       'What browsers/devices are in support, and does anything here need a fallback?',
       'Does this surface have its own theme, density, or constraints the system must respect?',
@@ -40,7 +40,7 @@ const groups = [
       'What does this look like at 320px wide and at 400% zoom, with no horizontal scrolling?',
       'Which breakpoints/container sizes change the layout, and are they system tokens?',
       'Should this respond to its container (container queries) rather than the viewport?',
-      'How does it behave with long content — translation expansion, long names, wrapped text?',
+      'How does it behave with long content (translation expansion, long names, wrapped text)?',
       'Are touch targets at least 24×24 CSS px (larger for primary actions)?',
     ],
   },
@@ -50,7 +50,7 @@ const groups = [
     items: [
       'Do we already have a component or pattern for this? Have we actually searched the docs and Figma library?',
       'If it almost fits: is the gap a variant, a composition, or genuinely new semantics?',
-      'Is this a one-off? If so, it lives in the product — what would promote it to the system later (a second consumer)?',
+      'Is this a one-off? If so, it lives in the product. What would promote it to the system later (a second consumer)?',
       'If we build it locally, who is accountable for it, and have we recorded the decision?',
       'Are we about to fork/detach a system component? What misfit is driving that, and has the system team heard it?',
     ],
@@ -59,9 +59,9 @@ const groups = [
     id: 'api',
     title: 'Component API & architecture',
     items: [
-      'What is the prop contract — variants, sizes, states? Are names consistent with the rest of the library?',
+      'What is the prop contract (variants, sizes, states)? Are names consistent with the rest of the library?',
       'Controlled, uncontrolled, or both? Who owns the state?',
-      'Composition or configuration — and does the choice match how consumers will actually use it?',
+      'Composition or configuration, and does the choice match how consumers will actually use it?',
       'Does it extend native element attributes and forward refs?',
       'Which tokens does it consume? Any hard-coded value a theme should own?',
       'What is explicitly out of scope for v1, and is that written down?',
@@ -83,7 +83,7 @@ const groups = [
     id: 'content',
     title: 'Content & internationalization',
     items: [
-      'Do we have real copy — labels, errors, empty states — or are we designing around lorem ipsum?',
+      'Do we have real copy (labels, errors, empty states), or are we designing around lorem ipsum?',
       'Do button labels say what they do, and does the vocabulary match the rest of the product?',
       'Will this be translated? Does the layout survive 2× text length and RTL?',
       'Are dates, numbers, and plurals formatted via Intl, not string concatenation?',
@@ -93,17 +93,17 @@ const groups = [
     id: 'states',
     title: 'States & interaction detail',
     items: [
-      'Is every state designed — hover, focus-visible, active, disabled, loading, error, empty, overflow?',
+      'Is every state designed (hover, focus-visible, active, disabled, loading, error, empty, overflow)?',
       'When does validation fire, and where do errors appear and get announced?',
       'Optimistic or pessimistic updates? What does the user see during latency, and on failure?',
-      'Is the action reversible? Undo, confirmation, or neither — and why?',
+      'Is the action reversible? Undo, confirmation, or neither, and why?',
     ],
   },
   {
     id: 'apis',
     title: 'APIs & integration',
     items: [
-      'Is the data contract agreed with the backend — shapes, nullability, error codes?',
+      'Is the data contract agreed with the backend (shapes, nullability, error codes)?',
       'How do loading, partial, and failure responses map to UI states?',
       'Pagination, caching, and refresh: who owns them, and what does stale data look like?',
       'Is this behind a feature flag? What is the rollout and rollback plan?',
@@ -114,14 +114,14 @@ const groups = [
     id: 'ai',
     title: 'AI interfaces (when relevant)',
     items: [
-      'The output is non-deterministic — how do we set expectations, and what does a wrong answer cost the user?',
+      'The output is non-deterministic. How do we set expectations, and what does a wrong answer cost the user?',
       'What are the loading/streaming states? Can users read, stop, or interrupt generation in progress?',
-      'How do we show provenance — sources, citations, confidence — so users can verify rather than trust?',
+      'How do we show provenance (sources, citations, confidence) so users can verify rather than trust?',
       'What are the refusal, empty, and failure states, and do they explain what to try instead?',
       'Can users correct, edit, regenerate, or undo AI output? Is a human always in control of consequential actions?',
       'How is feedback captured (thumbs, reports), and where does it go?',
-      'What data leaves the user\u2019s context to power this, and is that disclosed?',
-      'Does latency match the interaction — streaming for long generations, and honest progress otherwise?',
+      'What data leaves the user\'s context to power this, and is that disclosed?',
+      'Does latency match the interaction (streaming for long generations, honest progress otherwise)?',
     ],
   },
   {
@@ -131,17 +131,17 @@ const groups = [
       'What is the bundle/asset cost, and is it acceptable for this surface?',
       'Any layout shift, image sizing, or font loading issues (Core Web Vitals)?',
       'What analytics events prove the success metric from question one?',
-      'What is the test plan — unit, visual regression, automated a11y, manual passes?',
+      'What is the test plan (unit, visual regression, automated a11y, manual passes)?',
     ],
   },
   {
     id: 'tradeoffs',
     title: 'Trade-offs & alignment',
     items: [
-      'What are we trading — speed vs completeness, flexibility vs consistency — and is the choice explicit?',
+      'What are we trading (speed vs completeness, flexibility vs consistency), and is the choice explicit?',
       'What is the deadline forcing us to cut, and is that debt recorded with an owner?',
-      'Who signs off — design, a11y, engineering — and have they seen this list?',
-      'Where is the decision recorded so the next person doesn\u2019t re-litigate it?',
+      'Who signs off (design, a11y, engineering), and have they seen this list?',
+      'Where is the decision recorded so the next person doesn\'t re-litigate it?',
     ],
   },
 ];
@@ -153,7 +153,7 @@ const total = groups.reduce((n, g) => n + g.items.length, 0);
   <h1>Pre-code checklist</h1>
   <p class="lede">
     The questions to answer before anyone writes code. Use it live in a conversation with a PM,
-    designer, or engineer — skip groups that don't apply, but skip them on purpose. Progress is
+    designer, or engineer. Skip groups that don't apply, but skip them on purpose. Progress is
     saved in this browser.
   </p>
 
@@ -185,7 +185,7 @@ const total = groups.reduce((n, g) => n + g.items.length, 0);
 
   <div class="callout">
     <p>
-      Not every question needs a long answer — "not applicable, because…" is a valid answer. The
+      Not every question needs a long answer. "Not applicable, because…" is a valid answer. The
       failure mode this list prevents is the question nobody asked.
     </p>
   </div>
@@ -211,7 +211,7 @@ const total = groups.reduce((n, g) => n + g.items.length, 0);
       try {
         localStorage.setItem(KEY, JSON.stringify(state));
       } catch {
-        /* storage unavailable — checklist still works for the session */
+        /* storage unavailable; checklist still works for the session */
       }
     }
 

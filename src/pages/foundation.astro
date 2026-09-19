@@ -12,16 +12,16 @@ import Base from '../layouts/Base.astro';
   <h2>Definition</h2>
   <p>
     A design system is a shared language for building products: a set of reusable parts plus the
-    standards for using them. It is not a component library alone — the library is one artifact. A
+    standards for using them. It is not a component library alone. The library is one artifact. A
     reasonably complete system contains:
   </p>
   <ul>
-    <li><strong>Design tokens</strong> — named decisions (color, type, space, motion) stored as data.</li>
-    <li><strong>Components</strong> — coded, accessible building blocks with documented APIs.</li>
-    <li><strong>Patterns</strong> — compositions of components that solve recurring product problems.</li>
-    <li><strong>Guidelines</strong> — usage, content, and accessibility guidance around the parts.</li>
-    <li><strong>Governance</strong> — the people, processes, and versioning that keep it alive.</li>
-    <li><strong>Tooling</strong> — Figma libraries, lint rules, CI checks, documentation site.</li>
+    <li><strong>Design tokens:</strong> named decisions (color, type, space, motion) stored as data.</li>
+    <li><strong>Components:</strong> coded, accessible building blocks with documented APIs.</li>
+    <li><strong>Patterns:</strong> compositions of components that solve recurring product problems.</li>
+    <li><strong>Guidelines:</strong> usage, content, and accessibility guidance around the parts.</li>
+    <li><strong>Governance:</strong> the people, processes, and versioning that keep it alive.</li>
+    <li><strong>Tooling:</strong> Figma libraries, lint rules, CI checks, documentation site.</li>
   </ul>
 
   <h2>The layer model</h2>
@@ -35,7 +35,7 @@ tokens        named decisions: color.text.primary, space.200
    ↓
 primitives    unstyled behavior: focus trap, popover positioning
    ↓
-components    Button, TextField, Dialog — token-styled, ARIA-correct
+components    Button, TextField, Dialog (token-styled, ARIA-correct)
    ↓
 patterns      form layout, filtering, onboarding, error recovery
    ↓
@@ -48,7 +48,7 @@ product       features composed from the layers above</code></pre>
 
   <h2>Principles worth writing down</h2>
   <p>
-    Principles only earn their keep when they settle arguments. Common ones that do real work:
+    Principles only help when they settle arguments. Common ones that do real work:
   </p>
   <dl>
     <dt>Accessible by default</dt>
@@ -87,11 +87,11 @@ product       features composed from the layers above</code></pre>
   <div class="sources">
     <h2>Primary reading</h2>
     <ul>
-      <li><a href="https://atomicdesign.bradfrost.com/">Atomic Design — Brad Frost (free book)</a></li>
-      <li><a href="https://www.designsystems.com/">designsystems.com — guides and case studies</a></li>
-      <li><a href="https://www.w3.org/WAI/standards-guidelines/">W3C WAI — standards overview</a></li>
-      <li><a href="https://designsystem.digital.gov/">USWDS — a public, well-documented reference system</a></li>
-      <li><a href="https://design-system.service.gov.uk/">GOV.UK Design System — research-backed patterns</a></li>
+      <li><a href="https://atomicdesign.bradfrost.com/">Atomic Design by Brad Frost (free book)</a></li>
+      <li><a href="https://www.designsystems.com/">designsystems.com: guides and case studies</a></li>
+      <li><a href="https://www.w3.org/WAI/standards-guidelines/">W3C WAI: standards overview</a></li>
+      <li><a href="https://designsystem.digital.gov/">USWDS: a public, well-documented reference system</a></li>
+      <li><a href="https://design-system.service.gov.uk/">GOV.UK Design System: research-backed patterns</a></li>
     </ul>
   </div>
 </Base>

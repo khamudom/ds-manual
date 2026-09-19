@@ -1,9 +1,9 @@
 /* ---------------------------------------------------------------------------
-   Design tokens — the site practices what it documents.
+   Design tokens: the site practices what it documents.
    Tier 1 (primitives) feed Tier 2 (semantic). Components read semantic only.
 --------------------------------------------------------------------------- */
 :root {
-  /* Tier 1 — primitives */
+  /* Tier 1: primitives */
   --slate-950: #1e222b;
   --slate-800: #343a46;
   --slate-600: #545c6b;
@@ -17,7 +17,7 @@
   --gold-500: #a3720e;
   --white: #ffffff;
 
-  /* Tier 2 — semantic */
+  /* Tier 2: semantic */
   --bg: var(--paper);
   --bg-raised: var(--white);
   --bg-code: var(--slate-050);
