@@ -5,8 +5,8 @@ import Base from '../layouts/Base.astro';
 <Base title="Tokens">
   <h1>Tokens</h1>
   <p class="lede">
-    Design tokens are design decisions stored as named data — the smallest unit of the system, and
-    the layer that makes theming, consistency, and cross-platform delivery possible.
+    Design tokens are design decisions stored as named data. They are the smallest unit of the
+    system, and the layer that makes theming, consistency, and cross-platform delivery possible.
   </p>
 
   <h2>The three tiers</h2>
@@ -40,7 +40,7 @@ import Base from '../layouts/Base.astro';
 color.text.on-accent
 color.bg.surface.raised
 color.border.danger
-space.200            /* t-shirt or numeric scale — pick one */
+space.200            /* t-shirt or numeric scale: pick one */
 font.size.heading-lg
 motion.duration.fast</code></pre>
 
@@ -88,9 +88,9 @@ motion.duration.fast</code></pre>
 
   <h2>Decisions to settle early</h2>
   <ul>
-    <li><strong>Scale grammar:</strong> numeric (<code>space.100–900</code>) vs t-shirt (<code>sm/md/lg</code>). Numeric scales extend without renaming.</li>
+    <li><strong>Scale grammar:</strong> numeric (<code>space.100-900</code>) vs t-shirt (<code>sm/md/lg</code>). Numeric scales extend without renaming.</li>
     <li><strong>Units:</strong> <code>rem</code> for type and most spacing (respects user font-size settings); document the exceptions.</li>
-    <li><strong>Who may add primitives:</strong> usually only the system team — otherwise the palette sprawls.</li>
+    <li><strong>Who may add primitives:</strong> usually only the system team, otherwise the palette sprawls.</li>
     <li><strong>Contrast guarantees:</strong> encode which text/background pairings are AA-safe so themes can't silently break conformance.</li>
     <li><strong>Motion and elevation:</strong> tokenize them too, or they become the first sources of drift.</li>
   </ul>
@@ -100,8 +100,8 @@ motion.duration.fast</code></pre>
     <ul>
       <li><a href="https://tr.designtokens.org/format/">DTCG Design Tokens Format Module (spec draft)</a></li>
       <li><a href="https://www.w3.org/community/design-tokens/">W3C Design Tokens Community Group</a></li>
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN — Using CSS custom properties</a></li>
-      <li><a href="https://styledictionary.com/">Style Dictionary — token translation tooling</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">MDN: Using CSS custom properties</a></li>
+      <li><a href="https://styledictionary.com/">Style Dictionary: token translation tooling</a></li>
     </ul>
   </div>
 </Base>

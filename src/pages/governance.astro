@@ -5,8 +5,8 @@ import Base from '../layouts/Base.astro';
 <Base title="Governance">
   <h1>Governance</h1>
   <p class="lede">
-    Who decides, how change happens, and how the system stays trustworthy. Governance is the part
-    that fails silently first.
+    Who decides, how change happens, and how the system stays trustworthy. Governance is usually
+    the first part to quietly break down.
   </p>
 
   <h2>Team models</h2>
@@ -32,19 +32,19 @@ import Base from '../layouts/Base.astro';
   <h2>Contribution flow</h2>
   <p>A process that keeps quality without strangling contributions:</p>
   <ol>
-    <li><strong>Proposal:</strong> an issue template asking the checklist questions — problem, evidence of ≥2 consumers, existing-component audit, API sketch.</li>
+    <li><strong>Proposal:</strong> an issue template asking the checklist questions (problem, evidence of ≥2 consumers, existing-component audit, API sketch).</li>
     <li><strong>Triage:</strong> core team responds within a stated SLA: accept, redirect to an existing part, or "keep it local for now."</li>
     <li><strong>Build:</strong> contributor or core team, against the published definition of done.</li>
-    <li><strong>Review:</strong> three lenses — design fidelity, accessibility, code/API. Named reviewers, not a committee.</li>
-    <li><strong>Release & announce:</strong> changelog entry, docs live, migration notes if anything moved.</li>
+    <li><strong>Review:</strong> three lenses (design fidelity, accessibility, code/API). Named reviewers, not a committee.</li>
+    <li><strong>Release &amp; announce:</strong> changelog entry, docs live, migration notes if anything moved.</li>
   </ol>
 
   <h2>Versioning and change</h2>
   <ul>
-    <li><strong>Semantic versioning:</strong> major = breaking, minor = additive, patch = fixes. The discipline is in honestly classifying "breaking" — a visual change that shifts layout can break consumers too; say so.</li>
+    <li><strong>Semantic versioning:</strong> major = breaking, minor = additive, patch = fixes. The discipline is in honestly classifying "breaking." A visual change that shifts layout can break consumers too; say so.</li>
     <li><strong>Deprecate loudly, remove slowly:</strong> mark in types/docs (<code>@deprecated</code>), warn in dev builds, publish the replacement and a migration path, remove only in a scheduled major.</li>
     <li><strong>Codemods</strong> for mechanical migrations repay their cost after the second breaking change.</li>
-    <li><strong>Release notes are UX:</strong> written for the consuming engineer at upgrade time — what changed, what to do, how long it takes.</li>
+    <li><strong>Release notes are UX:</strong> written for the consuming engineer at upgrade time (what changed, what to do, how long it takes).</li>
   </ul>
 
   <h2>Support as a product surface</h2>
@@ -57,7 +57,7 @@ import Base from '../layouts/Base.astro';
   <h2>Measuring health</h2>
   <ul>
     <li><strong>Adoption:</strong> share of UI built from system components (component analytics / static scanning).</li>
-    <li><strong>Detachment / override rate:</strong> how often teams eject, wrap, or restyle parts — the strongest signal of API or design misfit.</li>
+    <li><strong>Detachment / override rate:</strong> how often teams eject, wrap, or restyle parts. The strongest signal of API or design misfit.</li>
     <li><strong>Contribution latency:</strong> proposal → shipped time.</li>
     <li><strong>Accessibility conformance:</strong> audit results over time, not just at launch.</li>
     <li><strong>Satisfaction:</strong> a short recurring survey of consuming designers and engineers.</li>
@@ -71,9 +71,9 @@ import Base from '../layouts/Base.astro';
     <h2>Primary reading</h2>
     <ul>
       <li><a href="https://semver.org/">Semantic Versioning 2.0.0</a></li>
-      <li><a href="https://carbondesignsystem.com/contributing/overview/">Carbon — contribution model example</a></li>
-      <li><a href="https://designsystem.digital.gov/about/">USWDS — governance of a public system</a></li>
-      <li><a href="https://www.designsystems.com/">designsystems.com — team and process case studies</a></li>
+      <li><a href="https://carbondesignsystem.com/contributing/overview/">Carbon: contribution model example</a></li>
+      <li><a href="https://designsystem.digital.gov/about/">USWDS: governance of a public system</a></li>
+      <li><a href="https://www.designsystems.com/">designsystems.com: team and process case studies</a></li>
     </ul>
   </div>
 </Base>

@@ -11,13 +11,13 @@ import Base from '../layouts/Base.astro';
 
   <h2>Anatomy and states</h2>
   <p>
-    Every component ships with its full state matrix designed and coded — the gaps are where product
+    Every component ships with its full state matrix designed and coded. The gaps are where product
     teams improvise. Minimum set to account for:
   </p>
   <ul>
     <li><strong>Interaction:</strong> default, hover, focus-visible, active, disabled.</li>
     <li><strong>Data:</strong> empty, loading, partial, full, overflowing (long text, many items).</li>
-    <li><strong>Validation:</strong> error, warning, success — with text, never color alone (WCAG 1.4.1).</li>
+    <li><strong>Validation:</strong> error, warning, success, with text, never color alone (WCAG 1.4.1).</li>
     <li><strong>Context:</strong> each theme, each density, RTL, 200% zoom, forced-colors mode.</li>
   </ul>
 
@@ -50,7 +50,7 @@ import Base from '../layouts/Base.astro';
 }`}</code></pre>
   <p>Habits embedded in that snippet:</p>
   <ul>
-    <li>Extend the native element's attributes — consumers keep <code>type</code>, <code>onClick</code>, <code>aria-*</code> for free.</li>
+    <li>Extend the native element's attributes so consumers keep <code>type</code>, <code>onClick</code>, <code>aria-*</code> for free.</li>
     <li>Forward the ref; product code will need it for focus management.</li>
     <li>Closed unions for variants: additions are cheap, renames are breaking changes.</li>
     <li>Name by purpose (<code>danger</code>) or prominence (<code>primary</code>), never by color (<code>redButton</code>).</li>
@@ -59,7 +59,7 @@ import Base from '../layouts/Base.astro';
 
   <h2>Accessibility is part of the component</h2>
   <p>
-    For any interactive widget, start from the ARIA Authoring Practices Guide (APG) pattern — it
+    For any interactive widget, start from the ARIA Authoring Practices Guide (APG) pattern. It
     specifies the expected roles, states, and keyboard behavior for dialogs, tabs, comboboxes,
     menus, and the rest. Rules of engagement:
   </p>
@@ -81,7 +81,7 @@ import Base from '../layouts/Base.astro';
 
   <h2>Definition of done</h2>
   <ul>
-    <li>Tokens only — no hard-coded values a theme should control.</li>
+    <li>Tokens only. No hard-coded values a theme should control.</li>
     <li>APG-conformant keyboard and screen-reader behavior, verified manually.</li>
     <li>States matrix implemented, including RTL and forced-colors.</li>
     <li>Docs: usage, do/don't, props table, a11y notes, examples.</li>
@@ -92,10 +92,10 @@ import Base from '../layouts/Base.astro';
   <div class="sources">
     <h2>Primary reading</h2>
     <ul>
-      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/">ARIA Authoring Practices Guide — patterns</a></li>
-      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">MDN — HTML element reference</a></li>
-      <li><a href="https://www.w3.org/TR/html-aria/">W3C — ARIA in HTML (what's allowed where)</a></li>
-      <li><a href="https://inclusive-components.design/">Inclusive Components — worked examples</a></li>
+      <li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/">ARIA Authoring Practices Guide: patterns</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">MDN: HTML element reference</a></li>
+      <li><a href="https://www.w3.org/TR/html-aria/">W3C: ARIA in HTML (what's allowed where)</a></li>
+      <li><a href="https://inclusive-components.design/">Inclusive Components: worked examples</a></li>
     </ul>
   </div>
 </Base>
