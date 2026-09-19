@@ -1,6 +1,6 @@
 # DS Field Manual
 
-A personal design-system reference site for a senior/principal UX engineer, built with Astro.
+A personal design-system reference site for a UX engineer, built with Astro.
 
 ## Run it
 
