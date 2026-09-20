@@ -708,13 +708,19 @@
           }
           case 'link': {
             const linkToken = token as Tokens.Link;
-            const a = document.createElement('a');
-            a.href = linkToken.href;
-            a.rel = 'noopener noreferrer';
-            a.target = '_blank';
-            if (linkToken.title) a.title = linkToken.title;
-            appendInline(linkToken.tokens, a, linkToken.text);
-            parent.appendChild(a);
+            const href = linkToken.href?.trim() ?? '';
+            const safeHref = /^https?:\/\//i.test(href) ? href : '';
+            if (safeHref) {
+              const a = document.createElement('a');
+              a.href = safeHref;
+              a.rel = 'noopener noreferrer';
+              a.target = '_blank';
+              if (linkToken.title) a.title = linkToken.title;
+              appendInline(linkToken.tokens, a, linkToken.text);
+              parent.appendChild(a);
+            } else {
+              appendInline(linkToken.tokens, parent, linkToken.text);
+            }
             break;
           }
           case 'br': {
